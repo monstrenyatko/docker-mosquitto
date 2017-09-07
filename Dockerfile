@@ -1,5 +1,7 @@
 FROM alpine:edge
 
+MAINTAINER Oleg Kovalenko <monstrenyatko@gmail.com>
+
 EXPOSE 1883
 EXPOSE 9883
 
