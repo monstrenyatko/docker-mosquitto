@@ -1,2 +1,5 @@
+*~
+/.settings/
+.project
 tmp/
 .vscode/
