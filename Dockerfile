@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM hypriot/rpi-alpine:3.6
 
 MAINTAINER Oleg Kovalenko <monstrenyatko@gmail.com>
 
