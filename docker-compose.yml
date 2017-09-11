@@ -1,34 +1,16 @@
 version: '2'
-
 services:
-        redis:
-                image: redis:3
-                volumes:
-                - ${PWD}/tmp/data:/data
-                ports:
-                - "6379"
-                container_name: "redis-mosq"
-                networks:
-                - mosqnet
-
-        mosquitto:
-                build: .
-                volumes:
-                - ${PWD}/auth-plugin.conf:/etc/mosquitto.d/auth-plugin.conf
-                ports:
-                - "1883:1883"
-                - "9883:9883"
-                environment:
-                - DOMAIN=example.local
-                - PORT=8080
-                networks:
-                - mosqnet
-                depends_on:
-                - redis
-                labels:
-                - "local.example.description=Mosquitto v1.4.14 MQTT server"
-#                links:
-#                - redis:mosquitto.redis.link
-
-networks:
-        mosqnet:
+  mosquitto:
+    image: monstrenyatko/rpi-mosquitto-auth
+    container_name: mosquitto
+    volumes:
+      - /etc/config/mosquitto/conf.d:/mosquitto/config/conf.d:ro
+      - mosquitto-data:/mosquitto/data
+    ports:
+      - 1883:1883
+      - 8883:8883
+      - 9001:9001
+    restart: unless-stopped
+volumes:
+  mosquitto-data:
+    external: true
