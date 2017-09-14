@@ -23,3 +23,7 @@ script:
     docker push $REPO:$TRAVIS_BUILD_NUMBER
     docker push $REPO:$TAG
   fi
+notifications:
+  email:
+    on_success: change
+    on_failure: always
