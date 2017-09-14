@@ -4,7 +4,6 @@ services:
     image: monstrenyatko/rpi-mosquitto-auth
     container_name: mosquitto
     volumes:
-      - /etc/config/mosquitto/conf.d:/mosquitto/config/conf.d:ro
       - mosquitto-data:/mosquitto/data
     ports:
       - 1883:1883
