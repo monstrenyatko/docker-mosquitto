@@ -19,7 +19,7 @@ RUN buildDeps='git build-base mariadb-dev libressl-dev libwebsockets-dev c-ares-
     git clone --depth 1 --single-branch --branch ${MONGO_C_VERSION} https://github.com/mongodb/mongo-c-driver.git mongo-c-driver && \
     cd mongo-c-driver && \
     git checkout ${MONGO_C_VERSION} && \
-    sh autogen.sh --with-libbson=bundled && \
+    sh autogen.sh --with-libbson=bundled --enable-examples=no --enable-tests=no && \
     make && \
     make install && \
     \
