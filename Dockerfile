@@ -66,7 +66,7 @@ RUN chmod +x /run.sh && \
 
 VOLUME ["/mosquitto/config", "/mosquitto/data", "/mosquitto/log"]
 
-EXPOSE 1883 8883 9001
+EXPOSE 1883
 
 ENTRYPOINT ["/run.sh"]
-CMD ["mosquitto"]
+CMD ["mosquitto-app", "-c", "/mosquitto/config/mosquitto.conf"]

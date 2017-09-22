@@ -1,5 +1,5 @@
-Mosquitto MQTT server for Docker on Raspberry Pi
-================================================
+Mosquitto MQTT server Docker image for Raspberry Pi
+===================================================
 
 [![Build Status](https://travis-ci.org/monstrenyatko/docker-rpi-mosquitto-auth.svg?branch=master)](https://travis-ci.org/monstrenyatko/docker-rpi-mosquitto-auth)
 
@@ -7,7 +7,7 @@ Mosquitto MQTT server for Docker on Raspberry Pi
 About
 =====
 
-[Mosquitto](https://mosquitto.org) `MQTT` server in a Docker container with `Authentication` plugin.
+[Mosquitto](https://mosquitto.org) `MQTT` server in the `Docker` container with `Authentication` plugin.
 
 Upstream Links
 --------------
@@ -58,8 +58,8 @@ Quick Start
 * Stop/Restart:
 
 	```sh
-		docker stop mosquitto
-		docker start mosquitto
+		docker-compose stop
+		docker-compose start
 	```
 
 Container is already configured for automatic restart (See `docker-compose.yml`).
@@ -71,4 +71,3 @@ Build own image
 		cd <path to sources>
 		./build.sh <tag name>
 ```
-

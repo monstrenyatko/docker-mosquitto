@@ -6,11 +6,12 @@ set -v
 # Exit on error
 set -e
 
-chown mosquitto:mosquitto -R /mosquitto/data
-
-if [ "$1" = 'mosquitto' ]; then
+if [ "$1" = 'mosquitto-app' ]; then
+	shift;
+	echo Parameters: "\"$@\""
+	chown mosquitto:mosquitto -R /mosquitto/data
 	mkdir -p '/mosquitto/config/conf.d' || true
-	exec /usr/local/sbin/mosquitto -c /mosquitto/config/mosquitto.conf
+	exec /usr/local/sbin/mosquitto "$@"
 fi
 
 exec "$@"
