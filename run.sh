@@ -1,17 +1,26 @@
 #!/bin/sh
 
 # Debug output
-set -v
+set -x
 
 # Exit on error
 set -e
 
+if [ -n "$MOSQUITTO_GID" ]; then
+	groupmod --gid $MOSQUITTO_GID mosquitto
+	usermod --gid $MOSQUITTO_GID mosquitto
+fi
+
+if [ -n "$MOSQUITTO_UID" ]; then
+	usermod --uid $MOSQUITTO_UID mosquitto
+fi
+
 if [ "$1" = 'mosquitto-app' ]; then
 	shift;
-	echo Parameters: "\"$@\""
-	chown mosquitto:mosquitto -R /mosquitto/data
+	mkdir -p '/mosquitto/data' '/mosquitto/log'
 	mkdir -p '/mosquitto/config/conf.d' || true
-	exec /usr/local/sbin/mosquitto "$@"
+	chown -R mosquitto '/mosquitto/data' '/mosquitto/log'
+	exec mosquitto "$@"
 fi
 
 exec "$@"

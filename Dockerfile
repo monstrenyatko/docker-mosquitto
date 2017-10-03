@@ -14,7 +14,7 @@ ENV AUTH_PLUG_VERSION=0.1.2
 COPY libressl.patch /
 RUN buildDeps='git build-base mariadb-dev libressl-dev libwebsockets-dev c-ares-dev util-linux-dev hiredis-dev curl-dev libxslt docbook-xsl automake autoconf libtool file'; \
     apk update && \
-    apk add $buildDeps mariadb-client-libs hiredis libwebsockets libuuid c-ares libressl curl ca-certificates && \
+    apk add $buildDeps mariadb-client-libs hiredis libwebsockets libuuid c-ares libressl curl ca-certificates shadow && \
     \
     git clone --depth 1 --single-branch --branch ${MONGO_C_VERSION} https://github.com/mongodb/mongo-c-driver.git mongo-c-driver && \
     cd mongo-c-driver && \
@@ -57,14 +57,11 @@ RUN buildDeps='git build-base mariadb-dev libressl-dev libwebsockets-dev c-ares-
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 COPY run.sh /
-COPY mosquitto.conf /mosquitto/config/mosquitto.conf
-RUN chmod +x /run.sh && \
-    mkdir -p /mosquitto/data && \
-    touch /mosquitto/data/.keep && \
-    mkdir -p /mosquitto/config/conf.d && \
-    touch /mosquitto/config/conf.d/.keep
+RUN chmod +x /run.sh
 
-VOLUME ["/mosquitto/config", "/mosquitto/data", "/mosquitto/log"]
+COPY mosquitto.conf /mosquitto/config/mosquitto.conf
+
+VOLUME ["/mosquitto/data", "/mosquitto/log"]
 
 EXPOSE 1883
 
