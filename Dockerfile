@@ -14,7 +14,7 @@ ENV AUTH_PLUG_VERSION=0.1.2
 COPY libressl.patch /
 RUN buildDeps='git build-base mariadb-dev libressl-dev libwebsockets-dev c-ares-dev util-linux-dev hiredis-dev curl-dev libxslt docbook-xsl automake autoconf libtool file'; \
     apk update && \
-    apk add $buildDeps mariadb-client-libs hiredis libwebsockets libuuid c-ares libressl curl ca-certificates shadow && \
+    apk add $buildDeps mariadb-client-libs hiredis libwebsockets libuuid c-ares libressl curl ca-certificates shadow gettext && \
     \
     git clone --depth 1 --single-branch --branch ${MONGO_C_VERSION} https://github.com/mongodb/mongo-c-driver.git mongo-c-driver && \
     cd mongo-c-driver && \
